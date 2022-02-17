@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "739075564506",
+    "project_id": "mynotesformsc2student-8b51b",
+    "storage_bucket": "mynotesformsc2student-8b51b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739075564506:android:1783708893a9f52d7456e3",
+        "android_client_info": {
+          "package_name": "com.example.mynotesformsc2students"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739075564506-873dp9aqt6nk4m9f074etpaom7ad6evl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVCA3bdydghVNy2it33_MNzwOebkcRhOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739075564506-873dp9aqt6nk4m9f074etpaom7ad6evl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
