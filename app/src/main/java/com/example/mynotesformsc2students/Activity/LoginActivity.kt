@@ -9,6 +9,12 @@ import android.widget.Toast
 import com.example.mynotesformsc2students.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -17,10 +23,31 @@ class LoginActivity : AppCompatActivity() {
     lateinit var btn_login_register:Button
     val AUTHUI_REQUEST_CODE = 111
     val TAG = "LoginActivity"
+    lateinit var mAdView:AdView
+    var mInterstitialAd: InterstitialAd? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        MobileAds.initialize(this){}
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712",
+            adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d(TAG, adError?.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d(TAG,"Ad was loaded")
+                mInterstitialAd = interstitialAd
+            }
+        })
 
         btn_login_register = findViewById(R.id.btn_login_register)
 
@@ -35,6 +62,11 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
 
         btn_login_register.setOnClickListener {
+            if (mInterstitialAd != null) {
+                mInterstitialAd?.show(this)
+            } else {
+                Log.d("TAG", "The interstitial ad wasn't ready yet.")
+            }
             performLoginAndRegister()
         }
     }
